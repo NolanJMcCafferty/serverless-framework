@@ -17,13 +17,6 @@ services:
         modifiable: false
         required: false
         defaultValue: ecs-serverless-cluster
-      - key: region
-        description: Region
-        name: Region
-        type: String
-        modifiable: false
-        required: false
-        defaultValue: us-east-2
       - key: subnet_id
         description: Subnet ID
         name: Subnet ID

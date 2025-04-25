@@ -10,7 +10,7 @@ aws ecs run-task \
   --count 1 \
   --launch-type FARGATE \
   --network-configuration "awsvpcConfiguration={subnets=[{{ $var.subnet_id }}],securityGroups=[{{ $var.security_group_id }}],assignPublicIp=ENABLED}" \
-  --region "{{ $var.region }}"
+  --region "{{ $sys.deploymentCell.region }}"
 EOF
   }
 
