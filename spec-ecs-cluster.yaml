@@ -10,13 +10,6 @@ services:
             reference: refs/tags/1.0
             repositoryUrl: https://github.com/NolanJMcCafferty/serverless-framework.git
     apiParameters:
-      - key: region
-        description: Region
-        name: Region
-        type: String
-        modifiable: false
-        required: false
-        defaultValue: us-east-2
       - key: aws_access_key_id
         description: AWS Access Key ID
         name: AWS Access Key ID

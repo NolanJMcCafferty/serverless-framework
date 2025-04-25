@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "{{ $var.region }}"
+  region = "{{ $sys.deploymentCell.region }}"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "public_subnet" {
   vpc_id                  = aws_vpc.serverless_deployer_vpc.id
   cidr_block              = "10.0.1.0/24"
-  availability_zone       = "{{ $var.region }}a"
+  availability_zone       = "{{ $sys.deploymentCell.region }}a"
   map_public_ip_on_launch = true
   
   tags = {
@@ -284,7 +284,7 @@ resource "aws_ecs_task_definition" "serverless_deployer" {
       environment = [
         {
           name  = "AWS_REGION"
-          value = "{{ $var.region }}"
+          value = "{{ $sys.deploymentCell.region }}"
         },
         {
           name  = "AWS_ACCESS_KEY_ID"
@@ -308,7 +308,7 @@ resource "aws_ecs_task_definition" "serverless_deployer" {
         logDriver = "awslogs"
         options = {
           "awslogs-group"         = aws_cloudwatch_log_group.serverless_deployer_logs.name
-          "awslogs-region"        = "{{ $var.region }}"
+          "awslogs-region"        = "{{ $sys.deploymentCell.region }}"
           "awslogs-stream-prefix" = "ecs"
         }
       }
