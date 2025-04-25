@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "{{ $sys.deploymentCell.region }}"
+}
+
 # This file provides a resource for running the ECS task
 # Note: This will trigger the task every time you apply the Terraform configuration
 

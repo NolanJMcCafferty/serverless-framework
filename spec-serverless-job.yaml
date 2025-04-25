@@ -1,13 +1,16 @@
-name: RunTask
+name: Run Task
 deployment:
+  hostedDeployment:
+    AwsAccountId: "010743873979"
+    AwsBootstrapRoleAccountArn: arn:aws:iam::010743873979:role/omnistrate-bootstrap-role
 services:
-  - name: runtask
+  - name: run-task
     terraformConfigurations:
       configurationPerCloudProvider:
         aws:
           terraformPath: /run_task
           gitConfiguration:
-            reference: refs/tags/3.0
+            reference: refs/tags/4.0
             repositoryUrl: https://github.com/NolanJMcCafferty/serverless-framework.git
     apiParameters:
       - key: ecs_cluster_name

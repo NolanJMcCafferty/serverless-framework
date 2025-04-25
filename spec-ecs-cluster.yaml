@@ -1,5 +1,8 @@
 name: Serverless Infrastructure
 deployment:
+  hostedDeployment:
+    AwsAccountId: "010743873979"
+    AwsBootstrapRoleAccountArn: arn:aws:iam::010743873979:role/omnistrate-bootstrap-role
 services:
   - name: ecs-cluster
     terraformConfigurations:
@@ -7,7 +10,7 @@ services:
         aws:
           terraformPath: /ecs_cluster
           gitConfiguration:
-            reference: refs/tags/3.0
+            reference: refs/tags/4.0
             repositoryUrl: https://github.com/NolanJMcCafferty/serverless-framework.git
     apiParameters:
       - key: aws_access_key_id
