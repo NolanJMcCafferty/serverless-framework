@@ -7,7 +7,7 @@ services:
         aws:
           terraformPath: /run_task
           gitConfiguration:
-            reference: refs/tags/1.0
+            reference: refs/tags/2.0
             repositoryUrl: https://github.com/NolanJMcCafferty/serverless-framework.git
     apiParameters:
       - key: ecs_cluster_name
