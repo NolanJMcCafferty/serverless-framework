@@ -108,17 +108,15 @@ resource "aws_s3_object" "serverless_yaml" {
   key    = "example.yaml"
   content = <<-EOT
     service: example-service
-
     provider:
       name: aws
       runtime: nodejs18.x
-      stage: ${opt:stage, 'dev'}
-      region: ${opt:region, 'us-east-2'}
+      stage: $${opt:stage, 'dev'}
+      region: $${opt:region, 'us-east-2'}
       memorySize: 256
       timeout: 20
       environment:
-        NODE_ENV: ${opt:stage, 'dev'}
-
+        NODE_ENV: $${opt:stage, 'dev'}
     functions:
       hello:
         handler: handler.hello
@@ -298,7 +296,7 @@ resource "aws_ecs_task_definition" "serverless_deployer" {
   container_definitions = jsonencode([
     {
       name      = "serverless-deployer"
-      image     = "${aws_ecr_repository.serverless_deployer.repository_url}:latest"
+      image     = "ghcr.io/nolanjmccafferty/serverless-deployer:latest"
       essential = true
       
       environment = [
@@ -320,7 +318,7 @@ resource "aws_ecs_task_definition" "serverless_deployer" {
         },
         {
           name  = "S3_SERVERLESS_CONFIG"
-          value = "s3://${aws_s3_bucket.serverless_config.id}/serverless.yml"
+          value = "s3://${aws_s3_bucket.serverless_config.id}/example.yaml"
         }
       ]
       
