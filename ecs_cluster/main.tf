@@ -106,8 +106,28 @@ resource "aws_s3_bucket_acl" "serverless_config_acl" {
 resource "aws_s3_object" "serverless_yaml" {
   bucket = aws_s3_bucket.serverless_config.id
   key    = "example.yaml"
-  source = "${path.module}/example.yaml"
-  etag   = filemd5("${path.module}/example.yaml")
+  content = <<-EOT
+    service: example-service
+
+    provider:
+      name: aws
+      runtime: nodejs18.x
+      stage: ${opt:stage, 'dev'}
+      region: ${opt:region, 'us-east-2'}
+      memorySize: 256
+      timeout: 20
+      environment:
+        NODE_ENV: ${opt:stage, 'dev'}
+
+    functions:
+      hello:
+        handler: handler.hello
+        events:
+          - httpApi:
+              path: /hello
+              method: get
+  EOT
+  content_type = "application/x-yaml"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
