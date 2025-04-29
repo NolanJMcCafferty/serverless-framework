@@ -1,0 +1,27 @@
+service: example-service
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-2'}
+  memorySize: 256
+  timeout: 20
+  environment:
+    NODE_ENV: ${opt:stage, 'dev'}
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get
+
+package:
+  individually: false
+  patterns:
+    - '!node_modules/**'
+    - '!.serverless/**'
+    - '!.git/**'
+    - 'handler.js'
+    - 'package.json'
+    - 'package-lock.json'

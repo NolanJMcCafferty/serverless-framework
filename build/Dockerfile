@@ -14,13 +14,15 @@ RUN apt-get update && \
 RUN python3 -m venv /opt/aws-cli && \
     /opt/aws-cli/bin/pip install --no-cache-dir awscli && \
     ln -s /opt/aws-cli/bin/aws /usr/local/bin/aws
-    
+
 RUN npm install -g serverless@latest
 
 WORKDIR /app
 
 COPY deploy.sh /app/deploy.sh
+COPY serverless.yaml /app/serverless.yaml
+COPY handler.js /app/handler.js
+
 RUN chmod +x /app/deploy.sh
 
 ENTRYPOINT ["/app/deploy.sh"]
-LABEL org.opencontainers.image.source="https://github.com/NolanJMcCafferty/serverless-framework"

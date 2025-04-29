@@ -1,0 +1,17 @@
+services:
+  serverless-framework:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    privileged: true
+x-omnistrate-image-registry-attributes:
+  ghcr.io:
+    auth:
+      password: ${{ secrets.GitHubPAT }}
+      username: NolanJMcCafferty
+x-omnistrate-integrations:
+- omnistrateLogging
+- omnistrateMetrics
+x-omnistrate-service-plan:
+  name: serverless-framework
+  tenancyType: OMNISTRATE_DEDICATED_TENANCY
