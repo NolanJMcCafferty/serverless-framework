@@ -26,3 +26,4 @@ COPY handler.js /app/handler.js
 RUN chmod +x /app/deploy.sh
 
 ENTRYPOINT ["/app/deploy.sh"]
+LABEL org.opencontainers.image.source="https://github.com/NolanJMcCafferty/serverless-framework"

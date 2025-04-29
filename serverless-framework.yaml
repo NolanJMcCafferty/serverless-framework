@@ -1,17 +1,25 @@
+version: '3'
+
+x-omnistrate-integrations:
+  - omnistrateLogging:
+  - omnistrateMetrics:
+
+x-omnistrate-service-plan:
+  name: 'ray-cluster'
+  tenancyType: 'OMNISTRATE_DEDICATED_TENANCY'
+  deployment:
+    byoaDeployment:
+      AwsAccountId: '621523791457'
+      AwsBootstrapRoleAccountArn: 'arn:aws:iam::621523791457:role/omnistrate-bootstrap-role'
+
 services:
   serverless-framework:
     build:
-      context: .
+      context: ./src
       dockerfile: Dockerfile
-    privileged: true
+
 x-omnistrate-image-registry-attributes:
   ghcr.io:
     auth:
       password: ${{ secrets.GitHubPAT }}
       username: NolanJMcCafferty
-x-omnistrate-integrations:
-- omnistrateLogging
-- omnistrateMetrics
-x-omnistrate-service-plan:
-  name: serverless-framework
-  tenancyType: OMNISTRATE_DEDICATED_TENANCY
