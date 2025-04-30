@@ -12,3 +12,5 @@ Create the Serverless Framework service template using the `spec-serverless.yaml
 ```
 omctl build-from-repo -f spec-serverless.yaml --service-name Serverless Framework
 ```
+
+This command packages the Serverless Framework deployer image and uploads it to your GitHub Container Registry as part of the service build process.
