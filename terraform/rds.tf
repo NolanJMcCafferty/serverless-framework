@@ -65,13 +65,6 @@ resource "aws_security_group" "database" {
   }
 }
 
-# Generate a random password for the RDS instance
-resource "random_password" "db_password" {
-  length           = 16
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-}
-
 # Store DB credentials in SSM Parameter Store
 resource "aws_ssm_parameter" "db_host" {
   name        = "/example/database/host"
@@ -91,7 +84,7 @@ resource "aws_ssm_parameter" "db_name" {
   name        = "/example/database/name"
   description = "Example RDS database name"
   type        = "String"
-  value       = aws_db_instance.example.name
+  value       = aws_db_instance.example.db_name
 }
 
 resource "aws_ssm_parameter" "db_username" {
@@ -105,7 +98,7 @@ resource "aws_ssm_parameter" "db_password" {
   name        = "/example/database/password"
   description = "Example RDS admin password"
   type        = "SecureString"
-  value       = random_password.db_password.result
+  value       = "example-password"
 }
 
 # Create RDS instance
@@ -118,7 +111,7 @@ resource "aws_db_instance" "example" {
   instance_class         = "db.t3.micro"
   db_name                = "exampledb"
   username               = "admin"
-  password               = random_password.db_password.result
+  password               = "example-password"
   parameter_group_name   = "default.mysql8.0"
   db_subnet_group_name   = aws_db_subnet_group.database.name
   vpc_security_group_ids = [aws_security_group.database.id]
