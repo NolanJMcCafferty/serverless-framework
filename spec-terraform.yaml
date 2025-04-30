@@ -12,6 +12,6 @@ services:
         aws:
           terraformPath: /terraform
           gitConfiguration:
-            reference: refs/tags/8.1
+            reference: refs/tags/8.2
             repositoryUrl: https://github.com/nolanjmccafferty/serverless-framework.git
           terraformExecutionIdentity: "arn:aws:iam::621523791457:role/omnistrate-terraform-role"
