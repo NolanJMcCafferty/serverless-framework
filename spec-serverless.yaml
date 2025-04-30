@@ -22,6 +22,9 @@ services:
       AWS_SECRET_ACCESS_KEY: $var.aws_secret_access_key
       SERVERLESS_ACCESS_KEY: $var.serverless_access_key
     privileged: true
+    x-omnistrate-job-config:
+      backoffLimit: 0
+      activeDeadlineSeconds: 3600
     x-omnistrate-api-params:
       - key: aws_access_key_id
         description: AWS Access Key ID
