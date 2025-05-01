@@ -21,6 +21,7 @@ services:
       AWS_ACCESS_KEY_ID: $var.aws_access_key_id
       AWS_SECRET_ACCESS_KEY: $var.aws_secret_access_key
       SERVERLESS_ACCESS_KEY: $var.serverless_access_key
+      SERVICE_NAME: "ideabox-demo-{{ $sys.id }}"
     privileged: true
     x-omnistrate-job-config:
       backoffLimit: 0
