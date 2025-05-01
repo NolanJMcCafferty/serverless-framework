@@ -1,39 +1,10 @@
-# Create a VPC for our resources
-resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_support   = true
-  enable_dns_hostnames = true
-  
-  tags = {
-    Name = "example-vpc"
-  }
-}
-
-# Create subnets across multiple availability zones for RDS
-resource "aws_subnet" "database_subnet_1" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "{{ $sys.deploymentCell.region }}a"
-  
-  tags = {
-    Name = "example-db-subnet-1"
-  }
-}
-
-resource "aws_subnet" "database_subnet_2" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "{{ $sys.deploymentCell.region }}b"
-  
-  tags = {
-    Name = "example-db-subnet-2"
-  }
-}
-
 # Create a subnet group for RDS
 resource "aws_db_subnet_group" "database" {
-  name       = "example-db-subnet-group"
-  subnet_ids = [aws_subnet.database_subnet_1.id, aws_subnet.database_subnet_2.id]
+  name       = "example-db-subnet-group-{{ $sys.id }}"
+  subnet_ids = [
+    "{{ $sys.deploymentCell.publicSubnetIDs[0].id }}",
+    "{{ $sys.deploymentCell.publicSubnetIDs[1].id }}",
+  ]
   
   tags = {
     Name = "example-db-subnet-group"
@@ -42,7 +13,7 @@ resource "aws_db_subnet_group" "database" {
 
 # Create a security group for RDS
 resource "aws_security_group" "database" {
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = "{{ $sys.deploymentCell.cloudProviderNetworkID }}"
   name        = "example-db-sg"
   description = "Allow database traffic"
   

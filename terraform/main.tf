@@ -16,7 +16,7 @@ data "aws_apigatewayv2_api" "api_details" {
   api_id = local.api_ids_list[count.index]
 }
 
-# Find the API ID that matches the Serverless Deployment
+# Find the API ID that matches the Serverless Job Deployment
 locals {
   matching_api_id = [
     for api in data.aws_apigatewayv2_api.api_details : api.id

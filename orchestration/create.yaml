@@ -1,0 +1,22 @@
+environmentType: DEV
+deployments:
+  serverless-job:
+    cloudProvider: aws
+    inputParameters:
+      aws_access_key_id: '<aws_access_key_id>'
+      aws_secret_access_key: '<aws_secret_access_key>'
+      serverless_access_key: '<serverless_access_key>'
+    productTierID: pt-6Fsl2Xu8c9
+    region: us-east-2
+    resourceID: r-PZ7SGijTmD
+    serviceID: s-ubKKyvW17z
+  terraform:
+    cloudProvider: aws
+    dependsOn:
+      - serverless-job
+    productTierID: pt-srSzIYq4m4
+    region: us-east-2
+    resourceID: r-td5iTHvOyc
+    serviceID: s-AUiqJHNnzz
+outputParameters:
+  endpoint: '{{ $terraform.out.api_gateway_endpoint }}'
