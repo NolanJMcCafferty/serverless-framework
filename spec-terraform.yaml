@@ -15,7 +15,7 @@ services:
             reference: refs/tags/8.11
             repositoryUrl: https://github.com/nolanjmccafferty/serverless-framework.git
           terraformExecutionIdentity: "arn:aws:iam::541226919566:role/omnistrate-ideabox-demo-terraform"
-    api-params:
+    apiParameters:
       - key: serverless_service_name
         description: Serverless Service Name
         name: SERVERLESS_SERVICE_NAME
