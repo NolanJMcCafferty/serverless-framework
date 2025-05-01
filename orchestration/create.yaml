@@ -3,8 +3,8 @@ deployments:
   serverless-job:
     cloudProvider: aws
     inputParameters:
-      aws_access_key_id: '<aws_access_key_id>'
-      aws_secret_access_key: '<aws_secret_access_key>'
+      aws_access_key_id: '<access_key_id>'
+      aws_secret_access_key: '<secret_access_key>'
       serverless_access_key: '<serverless_access_key>'
     productTierID: pt-6Fsl2Xu8c9
     region: us-east-1
@@ -14,6 +14,8 @@ deployments:
     cloudProvider: aws
     dependsOn:
       - serverless-job
+    inputParameters:
+      serverless_service_name: 'ideabox-demo-{{ $serverless-job.sys.id }}'
     productTierID: pt-srSzIYq4m4
     region: us-east-1
     resourceID: r-td5iTHvOyc
