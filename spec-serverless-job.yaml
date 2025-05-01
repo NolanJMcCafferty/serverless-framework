@@ -5,7 +5,7 @@ x-omnistrate-integrations:
   - omnistrateMetrics:
 
 x-omnistrate-service-plan:
-  name: 'serverless-framework'
+  name: 'serverless-job'
   tenancyType: 'OMNISTRATE_DEDICATED_TENANCY'
   deployment:
     hostedDeployment:
@@ -13,7 +13,7 @@ x-omnistrate-service-plan:
       AwsBootstrapRoleAccountArn: 'arn:aws:iam::621523791457:role/omnistrate-bootstrap-role'
 
 services:
-  serverless-framework:
+  serverless-job:
     build:
       context: ./src
       dockerfile: Dockerfile
@@ -37,12 +37,14 @@ services:
         name: AWS_SECRET_ACCESS_KEY
         type: String
         modifiable: false
+        sensitive: true
         required: true
       - key: serverless_access_key
         description: Serverless Access Key
         name: SERVERLESS_ACCESS_KEY
         type: String
         modifiable: false
+        sensitive: true
         required: true
 
 x-omnistrate-image-registry-attributes:
