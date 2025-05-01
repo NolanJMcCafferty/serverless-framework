@@ -2,8 +2,8 @@ name: 'Ideabox Demo'
 
 deployment:
   hostedDeployment:
-    AwsAccountId: '621523791457'
-    AwsBootstrapRoleAccountArn: 'arn:aws:iam::621523791457:role/omnistrate-bootstrap-role'
+    AwsAccountId: '541226919566'
+    AwsBootstrapRoleAccountArn: 'arn:aws:iam::541226919566:role/omnistrate-bootstrap-role'
 
 services:
   - name: ideabox-demo
@@ -12,6 +12,6 @@ services:
         aws:
           terraformPath: /terraform
           gitConfiguration:
-            reference: refs/tags/8.3
+            reference: refs/tags/8.4
             repositoryUrl: https://github.com/nolanjmccafferty/serverless-framework.git
-          terraformExecutionIdentity: "arn:aws:iam::621523791457:role/omnistrate-terraform-role"
+          terraformExecutionIdentity: "arn:aws:iam::541226919566:role/omnistrate-terraform-role"

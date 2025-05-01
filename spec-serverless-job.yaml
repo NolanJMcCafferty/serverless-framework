@@ -9,8 +9,8 @@ x-omnistrate-service-plan:
   tenancyType: 'OMNISTRATE_DEDICATED_TENANCY'
   deployment:
     hostedDeployment:
-      AwsAccountId: '621523791457'
-      AwsBootstrapRoleAccountArn: 'arn:aws:iam::621523791457:role/omnistrate-bootstrap-role'
+      AwsAccountId: '541226919566'
+      AwsBootstrapRoleAccountArn: 'arn:aws:iam::541226919566:role/omnistrate-bootstrap-role'
 
 services:
   serverless-job:
