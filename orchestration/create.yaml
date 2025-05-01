@@ -15,7 +15,7 @@ deployments:
     dependsOn:
       - serverless-job
     inputParameters:
-      serverless_service_name: 'ideabox-demo-{{ $serverless-job.sys.id }}'
+      serverless_service_name: 'ideabox-demo-{{ $serverless-job.sys.id }}-dev-hello'
     productTierID: pt-srSzIYq4m4
     region: us-east-1
     resourceID: r-td5iTHvOyc
