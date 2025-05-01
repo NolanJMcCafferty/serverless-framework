@@ -14,7 +14,7 @@ resource "aws_db_subnet_group" "database" {
 # Create a security group for RDS
 resource "aws_security_group" "database" {
   vpc_id      = "{{ $sys.deploymentCell.cloudProviderNetworkID }}"
-  name        = "example-db-sg"
+  name        = "example-db-sg-{{ $sys.id }}"
   description = "Allow database traffic"
   
   ingress {
@@ -32,41 +32,41 @@ resource "aws_security_group" "database" {
   }
   
   tags = {
-    Name = "example-db-sg"
+    Name = "example-db-sg-{{ $sys.id }}"
   }
 }
 
 # Store DB credentials in SSM Parameter Store
 resource "aws_ssm_parameter" "db_host" {
-  name        = "/example/database/host"
+  name        = "/example/database/host/{{ $sys.id }}"
   description = "Example RDS endpoint"
   type        = "String"
   value       = aws_db_instance.example.address
 }
 
 resource "aws_ssm_parameter" "db_port" {
-  name        = "/example/database/port"
+  name        = "/example/database/port/{{ $sys.id }}"
   description = "Example RDS port"
   type        = "String"
   value       = aws_db_instance.example.port
 }
 
 resource "aws_ssm_parameter" "db_name" {
-  name        = "/example/database/name"
+  name        = "/example/database/name/{{ $sys.id }}"
   description = "Example RDS database name"
   type        = "String"
   value       = aws_db_instance.example.db_name
 }
 
 resource "aws_ssm_parameter" "db_username" {
-  name        = "/example/database/username"
+  name        = "/example/database/username/{{ $sys.id }}"
   description = "Example RDS admin username"
   type        = "String"
   value       = aws_db_instance.example.username
 }
 
 resource "aws_ssm_parameter" "db_password" {
-  name        = "/example/database/password"
+  name        = "/example/database/password/{{ $sys.id }}"
   description = "Example RDS admin password"
   type        = "SecureString"
   value       = "example-password"
@@ -96,7 +96,7 @@ resource "aws_db_instance" "example" {
 
 # Create an IAM role for EC2 instances to access SSM parameters
 resource "aws_iam_role" "ssm_access" {
-  name = "example-ssm-access-role"
+  name = "example-ssm-access-role-{{ $sys.id }}"
   
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -114,7 +114,7 @@ resource "aws_iam_role" "ssm_access" {
 
 # Create an IAM policy for SSM parameter access
 resource "aws_iam_policy" "ssm_parameter_access" {
-  name        = "example-ssm-parameter-access"
+  name        = "example-ssm-parameter-access-{{ $sys.id }}"
   description = "Policy to allow access to specific SSM parameters"
   
   policy = jsonencode({
