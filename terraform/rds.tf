@@ -74,7 +74,7 @@ resource "aws_ssm_parameter" "db_password" {
 
 # Create RDS instance
 resource "aws_db_instance" "example" {
-  identifier             = "example-rds"
+  identifier             = "example-rds-{{ $sys.id }}"
   allocated_storage      = 20
   storage_type           = "gp2"
   engine                 = "mysql"
@@ -90,7 +90,7 @@ resource "aws_db_instance" "example" {
   publicly_accessible    = false
   
   tags = {
-    Name = "example-rds"
+    Name = "example-rds-{{ $sys.id }}"
   }
 }
 
