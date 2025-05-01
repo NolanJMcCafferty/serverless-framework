@@ -20,7 +20,7 @@ data "aws_apigatewayv2_api" "api_details" {
 locals {
   matching_api_id = [
     for api in data.aws_apigatewayv2_api.api_details : api.id
-    if api.name == "{{ $serverless_service_name }}"
+    if api.name == "{{ $var.serverless_service_name }}"
   ][0]
 }
 
