@@ -24,6 +24,6 @@ if [ -f "package.json" ]; then
 fi
 
 echo "Executing: serverless deploy --config $(basename "$SERVERLESS_FILE")"
-serverless deploy --config $(basename "$SERVERLESS_FILE") --service $SERVICE_NAME
+serverless deploy --config $(basename "$SERVERLESS_FILE")
 
 echo "Deployment completed successfully!"

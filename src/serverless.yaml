@@ -1,3 +1,4 @@
+service: ideabox-demo-${env:SERVICE_NAME, 'dev'}
 provider:
   name: aws
   runtime: nodejs18.x
