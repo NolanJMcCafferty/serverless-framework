@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "Starting serverless deployment process..."
+echo "Starting serverless $ACTION process..."
 
 # Always use the serverless.yaml file in the current directory
 SERVERLESS_FILE="/app/serverless.yaml"
@@ -23,7 +23,7 @@ if [ -f "package.json" ]; then
   npm install
 fi
 
-echo "Executing: serverless deploy --config $(basename "$SERVERLESS_FILE")"
-serverless deploy --config $(basename "$SERVERLESS_FILE")
+echo "Executing: serverless $ACTION --config $(basename "$SERVERLESS_FILE")"
+serverless $ACTION --config $(basename "$SERVERLESS_FILE")
 
-echo "Deployment completed successfully!"
+echo "$ACTION completed successfully!"

@@ -22,6 +22,7 @@ services:
       AWS_SECRET_ACCESS_KEY: $var.aws_secret_access_key
       SERVERLESS_ACCESS_KEY: $var.serverless_access_key
       SERVICE_NAME: "ideabox-demo-{{ $sys.id }}"
+      ACTION: $var.action
     privileged: true
     x-omnistrate-job-config:
       backoffLimit: 0
@@ -47,6 +48,16 @@ services:
         modifiable: false
         sensitive: true
         required: true
+      - key: action
+        description: Action
+        name: ACTION
+        type: String
+        modifiable: true
+        required: false
+        defaultValue: deploy
+        options:
+          - deploy
+          - remove
 
 x-omnistrate-image-registry-attributes:
   ghcr.io:

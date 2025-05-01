@@ -28,3 +28,5 @@ omnistrate-ctl services-orchestration create --dsl-file orchestration/create.yam
 ```
 
 This command will first deploy a Serverless Deployer job, and then pass an output of that job to the IdeaBox terraform service to complete the deployment. You can then call your Serverless function at the address specified by the `api_gateway_endpoint` output parameter.
+
+To destroy the infrastructure (Lambda and API Gateway) for a Serverless Deployer instance, modify the instance to use the `remove` action instead of `deploy`. This will kick off a job that runs `serverless remove`. This can be done on the Omnistrate UI or with the CLI.
